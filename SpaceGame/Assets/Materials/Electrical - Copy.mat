@@ -7,11 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:SpaceGame/Assets/Materials/Electrical - Copy.mat
   m_Name: Electrical - Copy
-========
-  m_Name: Water
->>>>>>>> origin/level_test:SpaceGame/Assets/Materials/Water.mat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
