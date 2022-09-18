@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: acda9d160b40d47bdb08c3bf9e7a0f5a
+guid: ec0439ada2e2c41adb60c2de42e2b6e7
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -8,7 +8,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Electrical
-    second: {fileID: 2100000, guid: 106a10b7632f44de9a39abb9c7c51e8c, type: 2}
+    second: {fileID: 2100000, guid: 0f8fc12800936456293a3df104d4fced, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Engine.001
+    second: {fileID: 2100000, guid: 8175c3c9e038541439e8f2988e415aaa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 7b11948d1b39140dcbfd9c14a8120653, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Turbine
+    second: {fileID: 2100000, guid: cff116245171b41c693b765cb3a11e3c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
