@@ -5,10 +5,12 @@ using UnityEngine;
 public class Gradual_Intensity : MonoBehaviour
 {
     Light light;
+    Material mat;
     // Start is called before the first frame update
     void Start()
     {
         light = GetComponent<Light>();
+        mat = GetComponent<MeshRenderer>().material;
     }
 
     // Update is called once per frame
@@ -17,6 +19,9 @@ public class Gradual_Intensity : MonoBehaviour
         if (light.intensity <= 4)
         {
             light.intensity += Time.deltaTime;
+            mat.SetColor("_EmissionColor", Color.white*light.intensity);
         }
+
+        
     }
 }
