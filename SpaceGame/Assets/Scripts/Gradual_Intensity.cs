@@ -5,6 +5,8 @@ public class Gradual_Intensity : MonoBehaviour
 {
     Light light;
     Material mat;
+
+    public Animator an;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class Gradual_Intensity : MonoBehaviour
             mat.SetColor("_EmissionColor", Color.white*light.intensity);
         }
 
-        
+        if (an != null)
+            an.Play("Switch_On");
     }
 }
