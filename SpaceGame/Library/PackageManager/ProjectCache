@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637991143965434725
-    m_Hash: 617296514
+      ticks: 637990991705556864
+    m_Hash: 1516301879
   m_LockFileStatus:
     m_FilePath: C:/Users/you29/Desktop/gamejam_2022/gamejam2022/SpaceGame/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637991143965434725
-    m_Hash: 2709392148
+      ticks: 637990991705676695
+    m_Hash: 499480174
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
