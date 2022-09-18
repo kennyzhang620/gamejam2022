@@ -1,13 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
     //Gameplay parameters
-    [SerializeField] private int asteroidImpacts;
+    private int asteroidImpacts;
+    private int missileImpacts;
+
+    public int AsteroidsDestroyed
+    {
+        get { return asteroidImpacts + missileImpacts; }
+    }
+    private List<Missile> launchedMissiles;
+    [SerializeField] private GameObject _missilePrefab;
 
     //INPUT VARIABLES 
     private Camera _shipCamera;
@@ -47,6 +56,8 @@ public class Ship : MonoBehaviour
     void Awake()
     {
         asteroidImpacts = 0;
+        missileImpacts = 0;
+        launchedMissiles = new List<Missile>();
         _rigidbody = GetComponent<Rigidbody>();
         // _rigidbody.inertiaTensorRotation = inertiaTensorRotation;
         // _rigidbody.inertiaTensor = inertiaTensor;
@@ -63,6 +74,7 @@ public class Ship : MonoBehaviour
         UpdateMouseWheelThrottle();
         UpdateKeyboardThrottle(KeyCode.W, KeyCode.S);
         SetPhysicsInput(new Vector3(strafe, 0.0f, throttle), new Vector3(pitch, yaw, roll));
+        launchMissiles();
     }
 
     //physics related updates
@@ -148,7 +160,27 @@ public class Ship : MonoBehaviour
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             asteroidImpacts++;
-
         }
+    }
+
+    void launchMissiles()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var pos = _rigidbody.position;
+            pos += transform.forward * 5;
+            var obj = Instantiate(_missilePrefab, pos, Quaternion.identity);
+            launchedMissiles.Add(obj.GetComponent<Missile>());
+        }
+        
+        var temp = new List<Missile>();
+        foreach (var missile in launchedMissiles)
+        {
+            if (missile.destroyed)
+                DestroyImmediate(missile.gameObject);
+            else
+                temp.Add(missile);
+        }
+        launchedMissiles = temp;
     }
 }

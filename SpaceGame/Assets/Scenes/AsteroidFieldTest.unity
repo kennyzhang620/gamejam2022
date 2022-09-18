@@ -292,12 +292,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AsteroidPrefab: {fileID: 3117851197206393249, guid: 441855ff8d48d9f449b017ff4f32fa27, type: 3}
-  MaxAsteroids: 50
-  MinAsteroids: 20
-  MaxAsteroidScale: 30
+  MaxAsteroids: 200
+  MinAsteroids: 100
+  MaxAsteroidScale: 50
   MinAsteroidScale: 10
-  MaxAsteroidSpawnDistance: 500
-  MinAsteroidSpawnDistance: 100
+  MaxAsteroidSpawnDistance: 2000
+  MinAsteroidSpawnDistance: 500
+  DistanceReset: 2000
 --- !u!1 &191817355 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2764512629625626004, guid: ec0439ada2e2c41adb60c2de42e2b6e7, type: 3}

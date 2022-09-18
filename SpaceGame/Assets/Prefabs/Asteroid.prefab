@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionPrefab: {fileID: 100000, guid: 5d028565f79e270408884b995abc06ef, type: 3}
-  maxRandSpeed: 5
+  _explosionScale: 10
+  maxRandSpeed: 50
   maxRandDist: 100
   _isTargetShip: 0

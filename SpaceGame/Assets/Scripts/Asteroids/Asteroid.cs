@@ -31,6 +31,7 @@ public class Asteroid : MonoBehaviour
 
     //variables for randomization limits
     public float maxRandSpeed = 1;
+    public float maxRandRotSpeed = 5;
     public float maxRandDist = 100;
     
     //relating to targeting and hitting the ship
@@ -147,19 +148,18 @@ public class Asteroid : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ship"))
+        if (collision.gameObject.CompareTag("Ship") ||
+            collision.gameObject.CompareTag("Missile"))
         {
             _state = AsteroidState.Collision;
-
-        } else if (collision.gameObject.GetComponent<Asteroid>() != null)
+        } else if (collision.gameObject.CompareTag("Asteroid"))
         {
-            //chain reaction 
+            // do nothing for now
         }
     }
 
     private void AsteroidCollisionEvent()
     {
-        print("exploooosion");
         //do explosion/impact animation here
         var explosion = Instantiate(_explosionPrefab, _rigidbody.position, Quaternion.identity);
         explosion.transform.localScale *=_explosionScale;

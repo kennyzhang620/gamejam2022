@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798d4d6916f14a30a0979e14a4d3746a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asteroidImpacts: 0
+  _missilePrefab: {fileID: 4507555507057186401, guid: e7bc0f247071f7847b6f9e44f690b398, type: 3}
   inertiaTensor: {x: 400, y: 1000, z: 800}
   inertiaTensorRotation: {x: 0.0056093745, y: -0.0066849915, z: -0.76601523, w: -0.64276314}
   bankLimit: 30
