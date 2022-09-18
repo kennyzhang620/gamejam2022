@@ -20,6 +20,8 @@ public class Spawner : MonoBehaviour
     public Slider temps;
     public ParticleSystem[] parts;
     public GameObject success;
+    public GameObject fail;
+    public GameObject_States gs;
 
     float t = 0;
     // Start is called before the first frame update
@@ -32,7 +34,7 @@ public class Spawner : MonoBehaviour
     {
         if (t > intv)
         {
-            print(State + "   " + transform.position.z + "  " +  Min + "  " +  Max);
+          //  print(State + "   " + transform.position.z + "  " +  Min + "  " +  Max);
             if (transform.position.z <= Min)
             {
                 State = 0;
@@ -57,7 +59,7 @@ public class Spawner : MonoBehaviour
         else
         {
             t += Time.deltaTime;
-            temps.value += init * (temps.value / 10);
+            temps.value += init * (temps.value / 30);
 
 
             if (temps.value <= 25)
@@ -68,6 +70,16 @@ public class Spawner : MonoBehaviour
             {
                 safety = 5;
                 success.SetActive(true);
+
+                // exit
+            }
+
+            if (temps.value >= 100)
+            {
+                fail.SetActive(true);
+                gameObject.SetActive(false);
+
+                // game over
             }
 
             if (Input.GetAxis("Cancel") != 0)
@@ -75,17 +87,15 @@ public class Spawner : MonoBehaviour
                 if (safety <= 0)
                 {
                     safety = 5;
-                    success.SetActive(true);
+                    gs.Activate();
+
+                    // exit
                 }
                 else
                 {
                     safety -= 1;
                 }
 
-            }
-            else if (temps.value > 25)
-            {
-                safety = 5;
             }
 
             int i = 0;

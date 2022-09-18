@@ -16,6 +16,11 @@ public class LoadTask : MonoBehaviour
         
     }
 
+    private void OnTaskExit()
+    {
+
+    }
+
     // Update is called once per frame
     private void OnTriggerStay(Collider other)
     {

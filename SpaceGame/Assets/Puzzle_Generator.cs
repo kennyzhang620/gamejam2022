@@ -49,5 +49,10 @@ public class Puzzle_Generator : MonoBehaviour
             textF.text = "UPDATE COMPLETE!";
             anim.Play("BIOS_C");
         }
+
+        if (Input.GetAxis("Cancel") != 0)
+        {
+           // exit;
+        }
     }
 }
