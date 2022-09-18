@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     public void SwitchToCameraWithTag(string tag)
     {
         foreach (var cam in cameras)
-            cam.enabled = CompareTag(tag);
+            cam.enabled = cam.CompareTag(tag);
     }
     
     public Camera GetCamera(string tag)

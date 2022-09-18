@@ -7,6 +7,8 @@ public class Ship : MonoBehaviour
 {
     //INPUT VARIABLES 
     private Camera _shipCamera;
+    [SerializeField] private Vector3 inertiaTensor = Vector3.zero;
+    [SerializeField] private Quaternion inertiaTensorRotation = Quaternion.identity;
     [SerializeField] private float bankLimit = 35f;
     [SerializeField] private float pitchSensitivity = 2.5f;
     [SerializeField] private float yawSensitivity = 2.5f;
@@ -41,11 +43,9 @@ public class Ship : MonoBehaviour
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-    }
+        _rigidbody.inertiaTensorRotation = inertiaTensorRotation;
+        _rigidbody.inertiaTensor = inertiaTensor;
 
-    private void Start()
-    {
-        _shipCamera = MainGame.Instance.CameraController.GetCamera("ShipCamera");
     }
 
     //input related updates
@@ -75,13 +75,13 @@ public class Ship : MonoBehaviour
         // Project the position of the mouse on screen out to some distance.
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 1000f;
-        Vector3 gotoPos = _shipCamera.ScreenToWorldPoint(mousePos);
+        Vector3 gotoPos = MainGame.Instance.CameraController.GetCamera("ShipCamera").ScreenToWorldPoint(mousePos);
 
         // Use that world position under the mouse as a target point.
         TurnTowardsPoint(gotoPos);
 
         // Use the mouse to bank the ship some degrees based on the mouse position.
-        BankShipRelativeToUpVector(mousePos, _shipCamera.transform.up);
+        BankShipRelativeToUpVector(mousePos, MainGame.Instance.CameraController.GetCamera("ShipCamera").transform.up);
     }
     
     private void BankShipRelativeToUpVector(Vector3 mousePos, Vector3 upVector)

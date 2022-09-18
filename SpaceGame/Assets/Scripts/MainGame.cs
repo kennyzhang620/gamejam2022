@@ -13,12 +13,6 @@ public class MainGame : MonoBehaviour
     private Ship _playerShip;
     private static MainGame _mainGameInstance = null;
 
-    private MainGame()
-    {
-        Awake();
-        Start();
-    }
-    
     public static MainGame Instance
     {
         get{return _mainGameInstance;}
@@ -54,7 +48,7 @@ public class MainGame : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        _cameraController.SwitchToCameraWithTag("PlayerCamera");
+        _cameraController.SwitchToCameraWithTag("ShipCamera");
         _gameState = GameState.Start;
     }
 
