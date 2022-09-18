@@ -40,6 +40,7 @@ public class MainGame : MonoBehaviour
     void Awake()
     {
         _mainGameInstance = this;
+        _playerShip = FindObjectOfType<Ship>();
         //get all the game task
         tasks = FindObjectsOfType<Task>();
         _cameraController = GetComponent<CameraController>();

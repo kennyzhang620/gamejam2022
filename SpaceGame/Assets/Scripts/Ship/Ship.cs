@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+    //Gameplay parameters
+    [SerializeField] private int asteroidImpacts;
+
     //INPUT VARIABLES 
     private Camera _shipCamera;
     [SerializeField] private Vector3 inertiaTensor = Vector3.zero;
@@ -42,9 +46,10 @@ public class Ship : MonoBehaviour
     private Vector3 appliedAngularForce = Vector3.zero;
     void Awake()
     {
+        asteroidImpacts = 0;
         _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.inertiaTensorRotation = inertiaTensorRotation;
-        _rigidbody.inertiaTensor = inertiaTensor;
+        // _rigidbody.inertiaTensorRotation = inertiaTensorRotation;
+        // _rigidbody.inertiaTensor = inertiaTensor;
 
     }
 
@@ -136,5 +141,14 @@ public class Ship : MonoBehaviour
     {
         appliedLinearForce = Vector3.Scale(linearForce, linearInput);
         appliedAngularForce = Vector3.Scale(angularForce, angularInput);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            asteroidImpacts++;
+
+        }
     }
 }
