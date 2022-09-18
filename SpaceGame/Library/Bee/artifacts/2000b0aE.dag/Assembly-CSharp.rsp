@@ -333,8 +333,12 @@
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Fake_Programming.cs"
+"Assets/GameObject_States.cs"
 "Assets/Gradual_Intensity.cs"
+"Assets/LoadTask.cs"
 "Assets/Puzzle_Generator.cs"
+"Assets/Remove_Rod.cs"
+"Assets/Rod_Detect.cs"
 "Assets/Scripts/Asteroid.cs"
 "Assets/Scripts/CameraController.cs"
 "Assets/Scripts/MainGame.cs"
@@ -343,6 +347,7 @@
 "Assets/Scripts/Ship/Ship.cs"
 "Assets/Scripts/Ship/ShipController.cs"
 "Assets/Scripts/Task.cs"
+"Assets/Spawner.cs"
 -langversion:9.0
 
 /deterministic
