@@ -13,6 +13,7 @@ public class MainGame : MonoBehaviour
     [SerializeField] private float MaxAsteroidTimer = 180;
     [SerializeField] private float MinAsteroidTimer = 60;
     [SerializeField] private float timerDifficultyDecrement = 15;
+    [SerializeField] private string initialCameraTag = "PlayerCamera";
 
     public LoadTask CurrentTask
     {
@@ -39,7 +40,7 @@ public class MainGame : MonoBehaviour
         get { return _playerShip; }
     }
 
-    enum GameState
+    public enum GameState
     {
         Start,
         Walking,
@@ -61,16 +62,22 @@ public class MainGame : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        _cameraController.SwitchToCameraWithTag("PlayerCamera");
+        _cameraController.SwitchToCameraWithTag(initialCameraTag);
         _gameState = GameState.Start;
     }
 
     void InitialScene()
     {
-        
         //player startup audio
         //have startup text
         asteroidTimer = MaxAsteroidTimer;
+    }
+
+    void GameOver()
+    {
+        // call game over white screen
+        Application.Quit();
+        
     }
 
     //check all conditions and update game state naturally
@@ -80,8 +87,15 @@ public class MainGame : MonoBehaviour
         {
             
         }
-        
+
+        if (_gameState == GameState.GameOver)
+        {
+            GameOver();
+        }
+
     }
+    
+    
 
     // Update is called once per frame
     void FixedUpdate()

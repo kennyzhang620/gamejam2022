@@ -12,9 +12,15 @@ public class LoadTask : MonoBehaviour
     [FormerlySerializedAs("NDTaskName")] public GameObject NDTask;
     private Scene _lastScene;
     private GameObject _triggerPlayer;
+    public bool taskActive;
 
     [SerializeField]int countdown = 100;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        taskActive = false;
+    }
 
     private void Start()
     {
@@ -41,6 +47,7 @@ public class LoadTask : MonoBehaviour
                 NDTask.SetActive(true);
             }
 
+            taskActive = true;
             MainGame.Instance.CurrentTask = this;
         }
     }
@@ -57,5 +64,7 @@ public class LoadTask : MonoBehaviour
         {
             SceneManager.LoadScene(_lastScene.ToString());
         }
+
+        taskActive = false;
     }
 }
