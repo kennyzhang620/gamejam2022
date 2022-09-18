@@ -11,6 +11,7 @@ public class Puzzle_Generator : MonoBehaviour
     public int DamageFactor = 0;
     public UnityEngine.UI.InputField textF;
     public UnityEngine.UI.Text question;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class Puzzle_Generator : MonoBehaviour
         else
         {
             textF.text = "UPDATE COMPLETE!";
+            anim.Play("BIOS_C");
         }
     }
 }
