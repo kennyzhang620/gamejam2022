@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Spawner : MonoBehaviour
+public class ReactorTaskSpawner : MonoBehaviour
 {
     public float Min;
     public float Max;
@@ -68,6 +68,7 @@ public class Spawner : MonoBehaviour
             {
                 safety = 5;
                 success.SetActive(true);
+                MainGame.Instance.CurrentTask.ExitTask();
             }
 
             if (Input.GetAxis("Cancel") != 0)
@@ -76,6 +77,7 @@ public class Spawner : MonoBehaviour
                 {
                     safety = 5;
                     success.SetActive(true);
+                    MainGame.Instance.CurrentTask.ExitTask();
                 }
                 else
                 {

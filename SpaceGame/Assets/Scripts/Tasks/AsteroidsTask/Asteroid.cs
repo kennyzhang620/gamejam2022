@@ -149,12 +149,10 @@ public class Asteroid : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ship") ||
-            collision.gameObject.CompareTag("Missile"))
+            collision.gameObject.CompareTag("Missile") ||
+            collision.gameObject.CompareTag("Asteroid"))
         {
             _state = AsteroidState.Collision;
-        } else if (collision.gameObject.CompareTag("Asteroid"))
-        {
-            // do nothing for now
         }
     }
 

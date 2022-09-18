@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -157,6 +158,11 @@ public class Ship : MonoBehaviour
         {
             asteroidImpacts++;
         }
+    }
+
+    private void OnDestroy()
+    {
+        //death animation
     }
 
     void launchMissiles()

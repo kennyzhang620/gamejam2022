@@ -5,10 +5,21 @@ using UnityEngine;
 
 public class MainGame : MonoBehaviour
 {
-    public Task[] tasks;
+    public LoadTask[] tasks;
     private CameraController _cameraController;
     private GameState _gameState;
-    private Task _currentTask;
+    private LoadTask _currentTask;
+    private float asteroidTimer;
+    [SerializeField] private float MaxAsteroidTimer = 180;
+    [SerializeField] private float MinAsteroidTimer = 60;
+    [SerializeField] private float timerDifficultyDecrement = 15;
+
+    public LoadTask CurrentTask
+    {
+        set { _currentTask = value;}
+        get { return _currentTask; }
+    }
+    
     private Player _player;
     private Ship _playerShip;
     private static MainGame _mainGameInstance = null;
@@ -43,48 +54,38 @@ public class MainGame : MonoBehaviour
         _mainGameInstance = this;
         _playerShip = FindObjectOfType<Ship>();
         //get all the game task
-        tasks = FindObjectsOfType<Task>();
+        tasks = FindObjectsOfType<LoadTask>();
         _cameraController = GetComponent<CameraController>();
     }
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        _cameraController.SwitchToCameraWithTag("ShipCamera");
+        _cameraController.SwitchToCameraWithTag("PlayerCamera");
         _gameState = GameState.Start;
     }
 
     void InitialScene()
     {
-        //player starts in front of ship 
-        //alarms blaring 
-        //dark except red emergency lights
-        //ship AI says some stuff
-        //player must switch on backup power switch 
-    }
-
-    //call this function to switch game state 
-    void TriggerTask(string tag)
-    {
         
-        
-        
+        //player startup audio
+        //have startup text
+        asteroidTimer = MaxAsteroidTimer;
     }
 
     //check all conditions and update game state naturally
-    void UpdateGameState()
+    void Update()
     {
+        while (asteroidTimer > 0)
+        {
+            
+        }
         
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        UpdateGameState();
-        
-        if(_gameState==GameState.Start)
-            InitialScene();
-        
-        //do more
+        asteroidTimer -= Time.fixedDeltaTime;
     }
 }

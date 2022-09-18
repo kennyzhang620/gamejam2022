@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Remove_Rod : MonoBehaviour
 {
-    public Spawner sp;
+    public ReactorTaskSpawner sp;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {

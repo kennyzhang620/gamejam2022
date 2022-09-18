@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Rod_Detect : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Spawner sp;
+    public ReactorTaskSpawner sp;
     public Slider sl;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)

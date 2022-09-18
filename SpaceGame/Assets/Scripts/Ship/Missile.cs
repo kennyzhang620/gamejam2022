@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Missile : MonoBehaviour
 {
-    [SerializeField] private float speed = 1000f;
+    [SerializeField] private float speed = 100f;
 
     [SerializeField] private GameObject explosionPrefab;
 
