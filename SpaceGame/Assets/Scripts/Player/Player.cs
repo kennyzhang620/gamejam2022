@@ -13,6 +13,11 @@ public class Player : MonoBehaviour
 
     public float speed = 5;
     public float sprintSpeed = 20;
+
+    public float currAngle = 0;
+
+    public float minAngle = -27;
+    public float maxAngle = 27;
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,6 +47,18 @@ public class Player : MonoBehaviour
         if (Input.GetAxis("Mouse X") < 0)
         {
             _rigidbody.transform.Rotate(0, -1*sensitivity, 0);
+        }
+
+        if (Input.GetAxis("Mouse Y") > 0 && currAngle < maxAngle)
+        {
+            playerCam.transform.Rotate(-0.5f * sensitivity, 0, 0);
+            currAngle++;
+        }
+
+        if (Input.GetAxis("Mouse Y") < 0 && currAngle > minAngle)
+        {
+            playerCam.transform.Rotate(0.5f * sensitivity, 0, 0);
+            currAngle--;
         }
 
         //Movement Update

@@ -8,7 +8,7 @@ public class LoadTask : MonoBehaviour
 
     public string SceneName;
     public GameObject NDTaskName;
-
+    public bool DisableCamera = true;
     int countdown = 100;
     // Start is called before the first frame update
     void Start()
@@ -29,9 +29,13 @@ public class LoadTask : MonoBehaviour
             }
             else if (NDTaskName != null)
             {
-                other.gameObject.SetActive(false);
+                if (DisableCamera)
+                    other.gameObject.SetActive(false);
+
                 NDTaskName.SetActive(true);
             }
+
+            gameObject.SetActive(false);
         }
     }
 }
