@@ -22,6 +22,7 @@ public class MainGame : MonoBehaviour
     {
         get{return _cameraController;}
     }
+    
     public Ship PlayerShip
     {
         get { return _playerShip; }

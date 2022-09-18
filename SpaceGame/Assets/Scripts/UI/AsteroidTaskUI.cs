@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShooterTaskUI : MonoBehaviour
+public class AsteroidTaskUI : MonoBehaviour
 {
     private Text text;
 
