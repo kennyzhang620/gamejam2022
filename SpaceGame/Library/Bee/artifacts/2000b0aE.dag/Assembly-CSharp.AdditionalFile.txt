@@ -1,0 +1,5 @@
+<<<<<<< HEAD:SpaceGame/Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.AdditionalFile.txt
+C:\Users\you29\Desktop\gamejam_2022\gamejam2022\SpaceGame
+=======
+/Users/kennyzhang/Desktop/gamejam2022/SpaceGame
+>>>>>>> origin/level_test:SpaceGame/Library/Bee/artifacts/2000b0aE.dag/Assembly-CSharp.AdditionalFile.txt
