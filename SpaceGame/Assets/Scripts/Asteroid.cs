@@ -8,28 +8,28 @@ using Random = UnityEngine.Random;
 public class Asteroid : MonoBehaviour
 {
     //State
-    private Vector3 destination;
-    public AsteroidState State { get; set; }
-    private AsteroidState lastState;
+    private Vector3 targetDestination;
+    public AsteroidState State;
+    private bool stateUpdate;
     private Rigidbody _rigidbody;
     private float speed;
+    private float initialDistance;
     private Vector3 rotDir;
-    
+
     //variables for randomization limits
-    public static float maxRandSpeed = 5;
-    public static float maxRandDist = 100;
+    public float maxRandSpeed = 1;
+    public float maxRandDist = 100;
     
     //relating to targeting and hitting the ship
-    private Ship targetShip;
-    private bool hitShip;
-    
+    private GameObject target;
+
     public enum AsteroidState
     {
+        Start,
         Idle,
         IdleMove,
         TargetLocked,
-        Collide,
-        Destroyed
+        Collision
     }
 
     void Awake()
@@ -37,59 +37,93 @@ public class Asteroid : MonoBehaviour
         //set the constant speed of the asteroid
         //this is random and done only once
         speed = Random.Range(0, maxRandSpeed);
-        lastState = AsteroidState.Idle;
-        State = AsteroidState.Idle;
+        _rigidbody = GetComponent<Rigidbody>();
+        stateUpdate = true;
+        State = AsteroidState.IdleMove;
         rotDir = Vector3.zero;
+        initialDistance = 0;
         rotDir.x = Random.Range(0, 1f);
         rotDir.y = Random.Range(0, 1f);
         rotDir.z = Random.Range(0, 1f);
-        targetShip = FindObjectOfType<Ship>();
+    }
+
+    public void SetTarget(GameObject obj)
+    {
+        if(target!=null)
+            //consider adding type check here 
+            //targets should be either ship or asteroid
+            target = obj;
     }
     
     //time till astroid reached/impacts its destination 
-    float GetTimeToImpact()
+    public float GetTimeToImpact()
     {
-        return (destination - _rigidbody.position).magnitude / speed;
+        return GetDistanceToImpact() / speed;
     }
 
-    //track ship position and slerp move asteroid to it
-    void TargetLock()
+    public float GetDistanceToImpact()
     {
-        destination = targetShip.transform.position;
+        return (targetDestination - _rigidbody.position).magnitude;
+    }
+    
+
+    //track ship position and slerp move asteroid to it
+    private void TargetLock()
+    {
+        targetDestination = target.transform.position;
+        if (State == AsteroidState.TargetLocked &&
+            stateUpdate)
+        {
+            initialDistance = GetDistanceToImpact();
+            stateUpdate = false;
+        }
+        
         SlerpMove();
     }
 
-    //idle the astroid, 0 velocity, only rotates in space
-    void Idle()
+    private void SetRandomDestination()
     {
-        if (lastState != AsteroidState.Idle)
+        targetDestination = _rigidbody.position;
+        targetDestination.x += Random.Range(-1*maxRandDist, maxRandDist);
+        targetDestination.y += Random.Range(-1*maxRandDist, maxRandDist);
+        targetDestination.z += Random.Range(-1*maxRandDist, maxRandDist);
+    }
+
+    //idle the astroid, 0 velocity, only rotates in space
+    private void Idle()
+    {
+        if (stateUpdate)
         {
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = rotDir * speed;
+            stateUpdate = false;
         }
     }
 
     //move astroid to destination by spherical interpolation to randomize path
-    void SlerpMove()
+    private void SlerpMove()
     {
-        if (!_rigidbody.position.Equals(destination))
+        if (!_rigidbody.position.Equals(targetDestination))
         {
-            float t =  speed/(destination - _rigidbody.position).magnitude;
-            Vector3 nextPos = Vector3.Slerp(_rigidbody.position, destination, t);
-            _rigidbody.MovePosition(nextPos);
+            // float t =  speed/(destination - _rigidbody.position).magnitude;
+            float t = (initialDistance-GetDistanceToImpact())/initialDistance;
+            if (t <= 0)
+                t = 0.05f;
+            Vector3 nextPos = Vector3.Slerp(_rigidbody.position, targetDestination, t);
+            Vector3 dir = (nextPos - _rigidbody.position).normalized;
+            _rigidbody.velocity = dir * speed;
         }
     }
 
     //move to a random destination initially set after state switch
-    void IdleMove()
+    private void IdleMove()
     {
-        if (lastState != AsteroidState.IdleMove)
+        if (stateUpdate)
         {
             _rigidbody.angularVelocity = rotDir * speed;
-            destination = _rigidbody.position;
-            destination.x += Random.Range(0, maxRandDist);
-            destination.y += Random.Range(0, maxRandDist);
-            destination.z += Random.Range(0, maxRandDist);
+            SetRandomDestination();
+            initialDistance = GetDistanceToImpact();
+            stateUpdate = false;
         }
         
         SlerpMove();
@@ -99,27 +133,41 @@ public class Asteroid : MonoBehaviour
     {
         if (collision.gameObject.name == "Ship")
         {
-            //do something when asteroid hits
-            //also update asteroid states
+            State = AsteroidState.Collision;
+            stateUpdate = true;
+        } else if (collision.gameObject.GetComponent<Asteroid>() != null)
+        {
+            //chain reaction 
         }
     }
 
-    void Update()
+    private void AsteroidCollisionEvent()
     {
-        if(State==AsteroidState.Idle)
-            Idle();
-        else if(State==AsteroidState.IdleMove)
-            IdleMove();
-        else if(State==AsteroidState.TargetLocked)
-            TargetLock();
-        
-        
-        
-        
+        //do explosion/impact animation here
+    }
 
+    void FixedUpdate()
+    {
+        if (State != AsteroidState.Collision)
+        {
+            if (targetDestination.Equals(_rigidbody.position))
+            {
+                stateUpdate = true;
+                State = AsteroidState.IdleMove;
+            }
 
-
-        lastState = State;
-
+            if(State==AsteroidState.Idle)
+                Idle();
+            else if(State==AsteroidState.IdleMove)
+                IdleMove();
+            else if(State==AsteroidState.TargetLocked)
+                TargetLock();
+        }
+        else
+        {
+            AsteroidCollisionEvent();
+            enabled = false;
+            Destroy(this);
+        }
     }
 }

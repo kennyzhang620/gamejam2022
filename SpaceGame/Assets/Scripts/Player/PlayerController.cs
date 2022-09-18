@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 newVel = _rigidbody.velocity;
         newVel.x = verMul;
+        newVel.y = 0;
         newVel.z = horMul;
         Vector3 rotatedVel = Vector3.RotateTowards(newVel, transform.forward, 10000f, 10000f);
         rotatedVel = rotatedVel.normalized * newVel.magnitude;
