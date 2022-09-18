@@ -6,12 +6,17 @@ m_ProjectFiles:
     m_ModificationDate:
       serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
       ticks: 637990991705556864
     m_Hash: 1516301879
 =======
       ticks: 637991165590000000
     m_Hash: 2891438559
 >>>>>>> origin/level_test
+=======
+      ticks: 637991143965434725
+    m_Hash: 617296514
+>>>>>>> master
   m_LockFileStatus:
     m_FilePath: /Users/kennyzhang/Desktop/gamejam2022/SpaceGame/Packages/packages-lock.json
     m_PathExists: 1
@@ -19,12 +24,17 @@ m_ProjectFiles:
     m_ModificationDate:
       serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
       ticks: 637990991705676695
     m_Hash: 499480174
 =======
       ticks: 637991165590000000
     m_Hash: 3956890126
 >>>>>>> origin/level_test
+=======
+      ticks: 637991143965434725
+    m_Hash: 2709392148
+>>>>>>> master
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
