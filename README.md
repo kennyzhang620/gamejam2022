@@ -3,7 +3,8 @@
 Voyager is a game created in under 24 hours from scratch in the Unity game engine. This game was developed during the 2022 BC GAME JAM. The underlying concept of the game is 'Chain Reaction'.
 
 ## Links
-* Game demo at https://ywishahy.itch.io/voyager. 
+* Video demo https://youtu.be/NkgOasFPQsM
+* Game demo files at https://ywishahy.itch.io/voyager. 
 * [Audio Files](https://drive.google.com/drive/folders/1kpUtoNU-M6Jta_8sI1-hwZPZUvf37Ori)
 
 ## Dev Team
